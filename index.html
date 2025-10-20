@@ -1,0 +1,32 @@
+<!-- /DistricPadel/index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Redirigiendo…</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    (async () => {
+      try {
+        const res = await fetch("./redirect.json?cb=" + Date.now());
+        const data = await res.json();
+        if (data && data.url) {
+          // Redirección inmediata
+          window.location.replace(data.url);
+        } else {
+          document.body.innerHTML = "<h2>No se encontró 'url' en redirect.json</h2>";
+        }
+      } catch (e) {
+        // Fallback opcional a un destino fijo si el JSON falla (cámbialo si quieres)
+        window.location.replace("https://www.instagram.com/journeypadelarena/?hl=es");
+      }
+    })();
+  </script>
+  <noscript>
+    <meta http-equiv="refresh" content="0;url=https://www.instagram.com/journeypadelarena/?hl=es">
+  </noscript>
+</head>
+<body>
+  <p>Redirigiendo, por favor espera…</p>
+</body>
+</html>
